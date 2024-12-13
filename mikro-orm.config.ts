@@ -1,7 +1,7 @@
 import { MikroOrmModuleOptions } from '@mikro-orm/nestjs';
 import { Options } from '@mikro-orm/core';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
-import { Task } from './src/task.entity';
+import { Task } from './src/task/task.entity';
 import * as dotenv from 'dotenv';
 dotenv.config();
 

@@ -26,4 +26,11 @@ export class TaskController {
   async updateTask(@Param('id') id: number, @Body('description') description: string) {
     return this.taskService.updateTask(id, description);
   }
+
+  @Put('toggle/:id')
+  async toggleTaskCompletion(
+    @Param('id') id: number
+  ) {
+    return this.taskService.toggleTaskCompletion(id);
+  }
 }

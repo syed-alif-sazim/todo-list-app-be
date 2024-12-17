@@ -13,4 +13,15 @@ export class TaskService {
   async getAllTasks(): Promise<Task[]> {
     return this.taskRepository.findAll();
   }
+
+  async createTask(newTaskObj: { description: string; isCompleted: boolean }): Promise<Task> {
+    const task = this.taskRepository.create({
+      description: newTaskObj.description,
+      is_completed: newTaskObj.isCompleted,
+    })
+
+    await this.taskRepository.getEntityManager().persistAndFlush(task);
+
+    return task
+  }
 }

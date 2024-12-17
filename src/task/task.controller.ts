@@ -10,4 +10,9 @@ export class TaskController {
   async getAllTasks(): Promise<Task[]> {
     return this.taskService.getAllTasks();
   }
+
+  @Post()
+  async create(@Body() newTaskObj: { description: string; isCompleted: boolean }) {
+    return this.taskService.createTask(newTaskObj); 
+  }
 }

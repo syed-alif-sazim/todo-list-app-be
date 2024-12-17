@@ -33,4 +33,15 @@ export class TaskService {
 
     await this.taskRepository.getEntityManager().removeAndFlush(task);
   }
+
+  async createTask(newTaskObj: { description: string; isCompleted: boolean }): Promise<Task> {
+    const task = new Task();
+
+    task.description = newTaskObj.description; 
+    task.is_completed = newTaskObj.isCompleted; 
+    
+    await this.em.persistAndFlush(task);
+
+    return task; 
+  }
 }

@@ -15,4 +15,10 @@ export class TaskController {
   async create(@Body() newTaskObj: { description: string; isCompleted: boolean }) {
     return this.taskService.createTask(newTaskObj); 
   }
+
+  @Delete(':id')
+  async deleteTask(@Param('id') id: number) {
+    await this.taskService.deleteTask(id);
+    return { message: 'Task deleted successfully' };
+  }
 }

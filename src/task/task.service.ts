@@ -44,4 +44,12 @@ export class TaskService {
 
     return task; 
   }
+
+  async deleteTask(id: number): Promise<void> {
+    const task = await this.em.findOne(Task, { id });
+    if (!task) {
+      throw new Error('Task not found');
+    }
+    await this.em.removeAndFlush(task);
+  }
 }

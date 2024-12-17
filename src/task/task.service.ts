@@ -34,22 +34,15 @@ export class TaskService {
     await this.taskRepository.getEntityManager().removeAndFlush(task);
   }
 
-  async createTask(newTaskObj: { description: string; isCompleted: boolean }): Promise<Task> {
-    const task = new Task();
-
-    task.description = newTaskObj.description; 
-    task.is_completed = newTaskObj.isCompleted; 
-    
-    await this.em.persistAndFlush(task);
-
-    return task; 
-  }
-
-  async deleteTask(id: number): Promise<void> {
-    const task = await this.em.findOne(Task, { id });
+  async updateTask(id: number, description: string): Promise<Task> {
+    const task = await this.taskRepository.findOne({ id });
     if (!task) {
       throw new Error('Task not found');
     }
-    await this.em.removeAndFlush(task);
+
+    task.description = description;
+    await this.taskRepository.getEntityManager().flush(); 
+
+    return task;
   }
 }

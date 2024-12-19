@@ -24,4 +24,13 @@ export class TaskService {
 
     return task
   }
+
+  async deleteTask(id: number): Promise<void> {
+    const task = await this.taskRepository.findOne({ id });
+    if (!task) {
+      throw new Error('Task not found');
+    }
+
+    await this.taskRepository.getEntityManager().removeAndFlush(task);
+  }
 }

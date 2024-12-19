@@ -45,4 +45,17 @@ export class TaskService {
 
     return task;
   }
+
+  async toggleTaskCompletion(id: number): Promise<Task> {
+    const task = await this.taskRepository.findOne({ id });
+    if (!task) {
+      throw new Error('Task not found');
+    }
+
+    task.is_completed = !task.is_completed;
+    
+    await this.taskRepository.getEntityManager().flush();
+    
+    return task;
+  }
 }

@@ -21,4 +21,9 @@ export class TaskController {
     await this.taskService.deleteTask(id);
     return { message: 'Task deleted successfully' };
   }
+
+  @Put(':id')
+  async updateTask(@Param('id') id: number, @Body('description') description: string) {
+    return this.taskService.updateTask(id, description);
+  }
 }

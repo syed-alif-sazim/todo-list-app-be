@@ -33,4 +33,16 @@ export class TaskService {
 
     await this.taskRepository.getEntityManager().removeAndFlush(task);
   }
+
+  async updateTask(id: number, description: string): Promise<Task> {
+    const task = await this.taskRepository.findOne({ id });
+    if (!task) {
+      throw new Error('Task not found');
+    }
+
+    task.description = description;
+    await this.taskRepository.getEntityManager().flush(); 
+
+    return task;
+  }
 }

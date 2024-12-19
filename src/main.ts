@@ -5,9 +5,11 @@ import { MikroORM } from '@mikro-orm/core';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
     
-  const orm = app.get(MikroORM);
-  await orm.getMigrator().up();
-  console.log('Database connected successfully!');
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    methods: 'GET, POST, PUT, DELETE', 
+    allowedHeaders: 'Content-Type, Authorization', 
+  });
 
   await app.listen(process.env.PORT ?? 3005);
 }

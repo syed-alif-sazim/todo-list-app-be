@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
-@Entity()
+@Entity({ tableName: 'tasks' })
 export class Task {
   @PrimaryKey()
   id!: number;
@@ -8,6 +8,6 @@ export class Task {
   @Property()
   description!: string;
 
-  @Property()
+  @Property({ fieldName: 'is_completed' })
   isCompleted!: boolean;
 }

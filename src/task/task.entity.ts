@@ -8,6 +8,6 @@ export class Task {
   @Property()
   description!: string;
 
-  @Property()
-  is_completed!: boolean;
+  @Property({ fieldName: 'is_completed' })
+  isCompleted!: boolean;
 }
